@@ -55,4 +55,22 @@ public class BoardController {
 		BoardVo vo = service.view(bno);
 		model.addAttribute("view", vo);
 	}
+	
+	// 게시물 수정
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void getModify(@RequestParam("bno") int bno, Model model) throws Exception {
+		BoardVo vo = service.view(bno);
+		model.addAttribute("view", vo);
+	}
+	
+	// 게시물 수정
+		@RequestMapping(value = "/modify", method = RequestMethod.POST)
+		public String postModify(BoardVo vo) throws Exception {
+			
+			// 뷰에서 컨트롤러로 넘어온 데이터(BoardVo)를 이용해 수정을 끝내고 
+			service.modify(vo);
+			
+			// 현재 bno에 해당되는 조회 페이지로 이동
+			return "redirect:/board/view?bno="+vo.getBno();
+		}
 }
