@@ -4,4 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.mappers.board">
 
+	<!-- 게시물 목록 -->
+	<!-- resultType은 데이터를 쿼리를 실행한 뒤 결과가 있을 경우에 사용 -->
+	<select id="list" resultType="com.board.domain.BoardVo">
+		select 
+			bno, title, content, writer, regDate, viewCnt
+		from tbl_board
+	</select>
+	
+	<!-- 게시물 작성 -->
+	<!-- parameterType은 데이터를 넣을 때 사용 -->
+	<insert id="write" parameterType="com.board.domain.BoardVo">
+		insert into tbl_Board(title, content, writer)
+			values (#{title}, #{content}, #{writer})
+	</insert>
 </mapper>
