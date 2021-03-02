@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.domain.BoardVo;
 import com.board.domain.Page;
+import com.board.domain.ReplyVo;
 import com.board.service.BoardService;
+import com.board.service.ReplyService;
 
 // 해당 클래스를 웹 요청을 처리하는 컨트롤러로 사용
 @Controller
@@ -20,7 +22,10 @@ import com.board.service.BoardService;
 public class BoardController {
 	
 	@Inject
-	BoardService service;
+	private BoardService service;
+	
+	@Inject
+	private ReplyService replyService;
 
 	// URL을 컨트롤러에 매핑 해주는 역할
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -55,6 +60,11 @@ public class BoardController {
 		// vo를 이용하여 서비스에서 데이터를 받고, 모델을 이용하여 뷰에 데이터를 넘겨준다.
 		BoardVo vo = service.view(bno);
 		model.addAttribute("view", vo);
+		
+		// 댓글 조회
+		List<ReplyVo> reply = null;
+		reply = replyService.list(bno);
+		model.addAttribute("reply", reply);
 	}
 	
 	// 게시물 수정
