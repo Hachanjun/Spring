@@ -9,6 +9,10 @@
 </head>
 <body>
 
+<div id="nav">
+	<%@ include file="../include/nav.jsp" %>
+</div>
+
 <form method="post">
 	<label>제목</label>
 	${view.title }<br/>
@@ -20,7 +24,8 @@
 	${view.content }<br/>
 	
 	<div>
-		<a href="/board/modify?bno=${view.bno }">게시물 수정</a>
+		<a href="/board/modify?bno=${view.bno }">게시물 수정</a>, 
+		<a href="/board/delete?bno=${view.bno }">게시물 삭제</a>
 	</div>
 </form>
 
